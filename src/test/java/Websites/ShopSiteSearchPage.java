@@ -1,4 +1,4 @@
-package SeleniumTesting;
+package Websites;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;

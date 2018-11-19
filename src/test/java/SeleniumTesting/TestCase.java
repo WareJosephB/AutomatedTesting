@@ -16,7 +16,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
 
-public class UntitledTestCase {
+import Websites.DemoSiteLoginPage;
+import Websites.DemoSiteMakeUser;
+import Websites.FlightHomepage;
+import Websites.FlightResultsPage;
+import Websites.ShopSiteResultsPage;
+import Websites.ShopSiteSearchPage;
+import Websites.StoreDemoQA;
+import Websites.StoreDemoQAResults;
+
+public class TestCase {
 	private static WebDriver driver;
 	private boolean acceptNextAlert = true;
 	private static StringBuffer verificationErrors = new StringBuffer();
@@ -51,6 +60,25 @@ public class UntitledTestCase {
 		ShopSiteResultsPage page2 = PageFactory.initElements(driver, ShopSiteResultsPage.class);
 		assertEquals(7, page2.numberOfResults());
 
+	}
+
+	@Test
+	public void testiPod() throws Exception{
+		driver.get("http://store.demoqa.com");
+		StoreDemoQA page = PageFactory.initElements(driver, StoreDemoQA.class);
+		page.search("ipod");
+		StoreDemoQAResults page2 = PageFactory.initElements(driver, StoreDemoQAResults.class);
+		assertEquals("$10.00", page2.getFirstPrice());
+				
+	}
+	
+	@Test
+	public void testFlights() throws Exception{
+		driver.get("https://www.phptravels.net");
+		FlightHomepage page = PageFactory.initElements(driver, FlightHomepage.class);
+		page.findHoliday("London");
+		FlightResultsPage page2 = PageFactory.initElements(driver, FlightResultsPage.class);
+		assertEquals("Rendezvous Hotels", page2.returnFirstResultName());
 	}
 
 	@AfterClass

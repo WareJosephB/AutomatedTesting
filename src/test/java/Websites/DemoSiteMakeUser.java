@@ -1,4 +1,4 @@
-package SeleniumTesting;
+package Websites;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -14,17 +14,17 @@ public class DemoSiteMakeUser {
 	@FindBy(name = "FormsButton2")
 	private WebElement submitButton;
 	
-	public void enterName(String name) {
+	private void enterName(String name) {
 		userField.clear();
 		userField.sendKeys(name);
 	}
 	
-	public void enterPassword(String password) {
+	private void enterPassword(String password) {
 		passwordField.clear();
 		passwordField.sendKeys(password);
 	}
 	
-	public void submitUser() {
+	private void submitUser() {
 		submitButton.click();
 	}
 	
