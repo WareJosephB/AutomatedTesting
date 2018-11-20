@@ -1,34 +1,26 @@
-package SeleniumTesting;
+package seleniumTesting;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
-
 import java.util.concurrent.TimeUnit;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
 
-import Websites.DemoSiteLoginPage;
-import Websites.DemoSiteMakeUser;
-import Websites.FlightHomepage;
-import Websites.FlightResultsPage;
-import Websites.ShopSiteResultsPage;
-import Websites.ShopSiteSearchPage;
-import Websites.StoreDemoQA;
-import Websites.StoreDemoQAResults;
+import demoSite.DemoSiteLoginPage;
+import demoSite.DemoSiteMakeUser;
+import flightSite.FlightHomepage;
+import flightSite.FlightResultsPage;
+import shopSite.ShopSiteResultsPage;
+import shopSite.ShopSiteSearchPage;
+import storeDemoQA.StoreDemoQA;
+import storeDemoQA.StoreDemoQAResults;
 
 public class TestCase {
 	private static WebDriver driver;
-	private boolean acceptNextAlert = true;
-	private static StringBuffer verificationErrors = new StringBuffer();
 
 	@BeforeClass
 	public static void setUp() throws Exception {
@@ -63,17 +55,17 @@ public class TestCase {
 	}
 
 	@Test
-	public void testiPod() throws Exception{
+	public void testiPod() throws Exception {
 		driver.get("http://store.demoqa.com");
 		StoreDemoQA page = PageFactory.initElements(driver, StoreDemoQA.class);
 		page.search("ipod");
 		StoreDemoQAResults page2 = PageFactory.initElements(driver, StoreDemoQAResults.class);
 		assertEquals("$10.00", page2.getFirstPrice());
-				
+
 	}
-	
+
 	@Test
-	public void testFlights() throws Exception{
+	public void testFlights() throws Exception {
 		driver.get("https://www.phptravels.net");
 		FlightHomepage page = PageFactory.initElements(driver, FlightHomepage.class);
 		page.findHoliday("London");
@@ -83,43 +75,7 @@ public class TestCase {
 
 	@AfterClass
 	public static void tearDown() throws Exception {
+		driver.close();
 		driver.quit();
-		String verificationErrorString = verificationErrors.toString();
-		if (!"".equals(verificationErrorString)) {
-			fail(verificationErrorString);
-		}
-	}
-
-	private boolean isElementPresent(By by) {
-		try {
-			driver.findElement(by);
-			return true;
-		} catch (NoSuchElementException e) {
-			return false;
-		}
-	}
-
-	private boolean isAlertPresent() {
-		try {
-			driver.switchTo().alert();
-			return true;
-		} catch (NoAlertPresentException e) {
-			return false;
-		}
-	}
-
-	private String closeAlertAndGetItsText() {
-		try {
-			Alert alert = driver.switchTo().alert();
-			String alertText = alert.getText();
-			if (acceptNextAlert) {
-				alert.accept();
-			} else {
-				alert.dismiss();
-			}
-			return alertText;
-		} finally {
-			acceptNextAlert = true;
-		}
 	}
 }

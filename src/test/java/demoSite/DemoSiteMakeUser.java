@@ -1,9 +1,9 @@
-package Websites;
+package demoSite;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class DemoSiteLoginPage {
+public class DemoSiteMakeUser {
 
 	@FindBy(name = "username")
 	private WebElement userField;
@@ -13,9 +13,6 @@ public class DemoSiteLoginPage {
 	
 	@FindBy(name = "FormsButton2")
 	private WebElement submitButton;
-	
-	@FindBy(xpath = "/html/body/table/tbody/tr/td[1]/big/blockquote/blockquote/font/center/b")
-	private WebElement confirmation;
 	
 	private void enterName(String name) {
 		userField.clear();
@@ -31,14 +28,10 @@ public class DemoSiteLoginPage {
 		submitButton.click();
 	}
 	
-	public void logIn(String username, String password) {
+	public void makeUser(String username, String password) {
 		enterName(username);
 		enterPassword(password);
 		submitUser();
-	}
-	
-	public String getConfirmation() {
-		return confirmation.getText();
 	}
 	
 }
