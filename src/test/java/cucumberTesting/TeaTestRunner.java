@@ -11,11 +11,14 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 
+import com.relevantcodes.extentreports.ExtentReports;
+
 @RunWith(Cucumber.class)
 @CucumberOptions(features="src/test/java/Tea.feature")
 public class TeaTestRunner {
 public static WebDriver driver;
-	
+public static ExtentReports report = new ExtentReports("C:\\Users\\Admin\\eclipse-workspace\\seleniumTesting\\src\\test\\java\\teaReport.html", true);
+
 	@BeforeClass
 	public static void setUp() {
 		System.setProperty("webdriver.chrome.driver",
@@ -28,5 +31,6 @@ public static WebDriver driver;
 	public static void tearDown() {
 		driver.close();
 		driver.quit();
+		report.flush();
 	}
 }
